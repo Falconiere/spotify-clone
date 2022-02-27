@@ -556,5 +556,6 @@ export function Home() {
   );
 }
 ```
+Now, the screen will display the header with the message "Good afternoon" and the three button icons.
 
 <img src="./assets/header-home-first-version.png" width="300" alt="Home screen with header" />
