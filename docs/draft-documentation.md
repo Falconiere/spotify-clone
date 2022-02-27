@@ -175,7 +175,94 @@ Rebuild the app and we can see the main screens with the bottom navigation.
 <img src="./assets/created-first-ui-for-the-main-screens.png" width="300" alt="Main Screens screen shot" />
 
 
-
-
 The next step is to change the bottom navigation styles to have the same color and the icons.
 
+
+Let update the theme provider to contain the main colors
+
+```src/providers/Theme/index.tsx```
+```javascript
+import React from "react";
+import { NativeBaseProvider, extendTheme } from "native-base";
+
+const theme = extendTheme({
+  colors: {
+    primary: {
+      50: "#121212",
+    },
+    secondary: {
+      50: "#65d46e",
+    },
+  },
+});
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  return <NativeBaseProvider theme={theme}>{children}</NativeBaseProvider>;
+}
+```
+
+After that, we need install the react-native-vector-icons.
+Make sure you have the following [documentation](https://github.com/oblador/react-native-vector-icons):
+```
+yarn add react-native-vector-icons
+```
+
+Once we have the vector icons, we can update the bottom navigation for the main screens.
+
+```src/routes/MainScreens/index.tsx```
+```javascript
+import React from "react";
+import { useTheme } from "native-base";
+
+import Entypo from "react-native-vector-icons/Entypo";
+import Feather from "react-native-vector-icons/Feather";
+import Ionicons from "react-native-vector-icons/Ionicons";
+
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+
+import { Home } from "screens/Home";
+import { Search } from "screens/Search";
+import { Library } from "screens/Library";
+
+const { Navigator, Screen } = createMaterialBottomTabNavigator();
+
+export function MainScreens() {
+  const theme = useTheme();
+  return (
+    <Navigator
+      barStyle={{
+        backgroundColor: theme.colors.primary["50"],
+      }}>
+      <Screen
+        name="Home"
+        component={Home}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Entypo name="home" color={color} size={20} />
+          ),
+        }}
+      />
+      <Screen
+        name="Search"
+        component={Search}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Feather name="search" color={color} size={20} />
+          ),
+        }}
+      />
+      <Screen
+        name="Library"
+        component={Library}
+        options={{
+          tabBarLabel: "Your Library",
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="library-sharp" color={color} size={20} />
+          ),
+        }}
+      />
+    </Navigator>
+  );
+}
+
+```
+<img src="./assets/updated-navigation-bottom.png" width="300" alt="Main Screens screen shot with the background and icons" />

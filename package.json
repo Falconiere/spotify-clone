@@ -10,8 +10,10 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@native-base/icons": "^0.0.11",
     "@react-navigation/material-bottom-tabs": "^6.1.1",
     "@react-navigation/native": "^6.0.8",
+    "@types/react-native-vector-icons": "^6.4.10",
     "babel-plugin-module-resolver": "^4.1.0",
     "native-base": "^3.3.7",
     "react": "17.0.2",
