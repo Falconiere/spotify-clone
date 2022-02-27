@@ -1,0 +1,176 @@
+
+# Notes
+ Make sure you have these same files with the same content
+ * eslintrc.js
+ * prettierrc.js
+ * tsconfig.json
+ * metro.config.js
+ * babel.config.js
+
+ Install the dependencies:
+  * ```yarn add react-native-typescript-transformer```
+  * ```yarn add babel-plugin-module-resolver```
+  * ```yarn add metro-react-native-babel-preset```
+
+
+
+So, let's code a Spotify clone with react-native
+
+The first step you have to config your environment to support react-native. React-native
+has a very good documentation. For this project, we will use the react-native-cli.
+
+* Set up the environment with react-native: https://reactnative.dev/docs/environment-setup
+
+Once you have installed everything, you can start the project. Run this command on your terminal:
+
+```
+npx react-native init SpotifyClone --template react-native-template-typescript  
+```
+
+<==============================>
+
+
+For this clone we will use the [nativebase.io](https://docs.nativebase.io/) as the framework for the UI
+
+```
+// Install the nativebase.io for existing project
+yarn add native-base react-native-svg react-native-safe-area-context
+```
+
+```
+// Run Pod install
+cd ios/
+pod install
+```
+
+
+<==============================>
+
+# Folder structure:
+
+```
+root/
+  src/
+    providers/
+      Theme/index.tsx
+    routes/
+      index.tsx
+    components/
+      Button/
+        index.tsx
+    screens/
+      Home/
+        index.tsx
+        styles.ts
+```
+
+Lets start creating the ThemeProvider.
+
+
+```src/providers/Theme/index.tsx```
+
+```javascript
+  import React from "react";
+  import { NativeBaseProvider } from "native-base";
+
+  export function ThemeProvider({ children }: { children: React.ReactNode }) {
+    return <NativeBaseProvider>{children}</NativeBaseProvider>;
+  }
+```
+
+Now as we have the basic configuration for the theme, we can start creating the screens. Let's start with the Home, Search and Library screens.
+
+```src/screens/Home/index.tsx```
+```javascript
+import React from "react";
+import { Text } from "native-base";
+
+export function Home() {
+  return <Text>Home</Text>;
+}
+```
+
+
+```src/screens/Search/index.tsx```
+```javascript
+import React from "react";
+import { Text } from "native-base";
+
+export function Search() {
+  return <Text>Search</Text>;
+}
+```
+```src/screens/Library/index.tsx```
+```javascript
+import React from "react";
+import { Text } from "native-base";
+
+export function Library() {
+  return <Text>Library</Text>;
+}
+```
+
+These are the main screens of the app. The next step is to create the bottom navigation for them. For that task, we need to install the base [reactnavigation](https://reactnavigation.org/docs/getting-started]) and [the Material Bottom Tabs](https://reactnavigation.org/docs/material-bottom-tab-navigator/). After that, we can create the bottom navigation. Remember to run pod install on the ios folder or ```npx pod-install ios```.
+
+
+```src/routes/MainScreens/index.tsx```
+
+```javascript
+import React from "react";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+
+import { Home } from "screens/Home";
+import { Search } from "screens/Search";
+import { Library } from "screens/Library";
+
+const { Navigator, Screen } = createMaterialBottomTabNavigator();
+
+export function MainScreens() {
+  return (
+    <Navigator>
+      <Screen name="Home" component={Home} />
+      <Screen name="Search" component={Search} />
+      <Screen name="Library" component={Library} />
+    </Navigator>
+  );
+}
+```
+
+After that, lets create the index fo routes and import the MainNavigation.
+
+```src/routes/index.tsx```
+```javascript
+import React from "react";
+
+import { NavigationContainer } from "@react-navigation/native";
+
+import { MainScreens } from "./MainScreens";
+import { ThemeProvider } from "providers/Theme";
+
+export function Routes() {
+  return (
+    <NavigationContainer>
+      <ThemeProvider>
+        <MainScreens />
+      </ThemeProvider>
+    </NavigationContainer>
+  );
+}
+```
+
+Then we can modify the ```root/index.js``` file to include the Routes.
+
+```javascript
+/**
+ * @format
+ */
+
+import { AppRegistry } from "react-native";
+import { Routes as App } from "./src/routes";
+import { name as appName } from "./app.json";
+
+AppRegistry.registerComponent(appName, () => App);
+```
+Rebuild the app and we can see the main screens.
+
+![image](./assets/created-first-ui-for-the-main-screens.png.png)
