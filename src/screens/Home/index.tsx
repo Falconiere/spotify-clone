@@ -1,6 +1,8 @@
 import React from "react";
 import { ScrollView } from "native-base";
+
 import { CarouselAlbums } from "domains/home/CarouselAlbums";
+import { HomeHeader } from "domains/home/HomeHeader";
 
 const mockData = [
   {
@@ -38,6 +40,7 @@ const mockData = [
 export function Home() {
   return (
     <ScrollView bg="primary.50">
+      <HomeHeader />
       <CarouselAlbums title="Trending albums for you" data={mockData} />
       <CarouselAlbums title="Your shows" data={mockData} />
       <CarouselAlbums title="Recently Played" data={mockData} cardSize="sm" />

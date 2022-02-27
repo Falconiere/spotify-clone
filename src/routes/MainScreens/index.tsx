@@ -1,10 +1,7 @@
 import React from "react";
-import { useTheme } from "native-base";
+import { StatusBar, useTheme, Icon } from "native-base";
 
-import Entypo from "react-native-vector-icons/Entypo";
-import Feather from "react-native-vector-icons/Feather";
-import Ionicons from "react-native-vector-icons/Ionicons";
-
+import { Ionicons, Feather, Entypo } from "@native-base/icons";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 
 import { Home } from "screens/Home";
@@ -16,38 +13,46 @@ const { Navigator, Screen } = createMaterialBottomTabNavigator();
 export function MainScreens() {
   const theme = useTheme();
   return (
-    <Navigator
-      barStyle={{
-        backgroundColor: theme.colors.primary["50"],
-      }}>
-      <Screen
-        name="Home"
-        component={Home}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <Entypo name="home" color={color} size={20} />
-          ),
-        }}
-      />
-      <Screen
-        name="Search"
-        component={Search}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <Feather name="search" color={color} size={20} />
-          ),
-        }}
-      />
-      <Screen
-        name="Library"
-        component={Library}
-        options={{
-          tabBarLabel: "Your Library",
-          tabBarIcon: ({ color }) => (
-            <Ionicons name="library-sharp" color={color} size={20} />
-          ),
-        }}
-      />
-    </Navigator>
+    <>
+      <StatusBar barStyle="light-content" />
+      <Navigator
+        barStyle={{
+          backgroundColor: theme.colors.primary["50"],
+        }}>
+        <Screen
+          name="Home"
+          component={Home}
+          options={{
+            tabBarIcon: ({ color }) => (
+              <Icon as={Entypo} name="home" color={color} size="sm" />
+            ),
+          }}
+        />
+        <Screen
+          name="Search"
+          component={Search}
+          options={{
+            tabBarIcon: ({ color }) => (
+              <Icon as={Feather} name="search" color={color} size="sm" />
+            ),
+          }}
+        />
+        <Screen
+          name="Library"
+          component={Library}
+          options={{
+            tabBarLabel: "Your Library",
+            tabBarIcon: ({ color }) => (
+              <Icon
+                as={Ionicons}
+                name="library-sharp"
+                color={color}
+                size="sm"
+              />
+            ),
+          }}
+        />
+      </Navigator>
+    </>
   );
 }
