@@ -173,4 +173,4 @@ AppRegistry.registerComponent(appName, () => App);
 ```
 Rebuild the app and we can see the main screens.
 
-![image](./assets/created-first-ui-for-the-main-screens.png.png)
+![image](/docs/assets/created-first-ui-for-the-main-screens.png.png)
