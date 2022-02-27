@@ -1,6 +1,46 @@
 import React from "react";
-import { Text } from "native-base";
+import { ScrollView } from "native-base";
+import { CarouselAlbums } from "domains/home/CarouselAlbums";
+
+const mockData = [
+  {
+    id: "album-1",
+    thumbnail: "https://place-hold.it/150x150",
+    title: "Album 1",
+    subTitle: "Artist 1",
+  },
+  {
+    id: "album-2",
+    thumbnail: "https://place-hold.it/150x150",
+    title: "Album 1",
+    subTitle: "Artist 1",
+  },
+  {
+    id: "album-3",
+    thumbnail: "https://place-hold.it/150x150",
+    title: "Album 1",
+    subTitle: "Artist 1",
+  },
+  {
+    id: "album-4",
+    thumbnail: "https://place-hold.it/150x150",
+    title: "Album 1",
+    subTitle: "Artist 1",
+  },
+  {
+    id: "album-5",
+    thumbnail: "https://place-hold.it/150x150",
+    title: "Album 1",
+    subTitle: "Artist 1",
+  },
+];
 
 export function Home() {
-  return <Text>Home</Text>;
+  return (
+    <ScrollView bg="primary.50">
+      <CarouselAlbums title="Trending albums for you" data={mockData} />
+      <CarouselAlbums title="Your shows" data={mockData} />
+      <CarouselAlbums title="Recently Played" data={mockData} cardSize="sm" />
+    </ScrollView>
+  );
 }

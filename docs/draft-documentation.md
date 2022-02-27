@@ -266,3 +266,9 @@ export function MainScreens() {
 
 ```
 <img src="./assets/updated-navigation-bottom.png" width="300" alt="Main Screens screen shot with the background and icons" />
+
+Perfect, the clone is starting getting more shape. Lets continue to the components from the home screen.
+
+The first component we will start to build, is the albums card. The component contains the thumbnail, the title and the artist.
+
+```src/components/AlbumsCard/index.tsx```
