@@ -1,5 +1,5 @@
 
-# Notes
+## Notes before we start
  Make sure you have these same files with the same content
  * eslintrc.js
  * prettierrc.js
@@ -12,8 +12,7 @@
   * ```yarn add babel-plugin-module-resolver```
   * ```yarn add metro-react-native-babel-preset```
 
-
-
+## Getting Started
 So, let's code a Spotify clone with react-native
 
 The first step you have to config your environment to support react-native. React-native
@@ -174,4 +173,9 @@ AppRegistry.registerComponent(appName, () => App);
 Rebuild the app and we can see the main screens with the bottom navigation.
 
 <img src="./assets/created-first-ui-for-the-main-screens.png" width="300" alt="Main Screens screen shot" />
+
+
+
+
+The next step is to change the bottom navigation styles to have the same color and the icons.
 
