@@ -272,3 +272,171 @@ Perfect, the clone is starting getting more shape. Lets continue to the componen
 The first component we will start to build, is the albums card. The component contains the thumbnail, the title and the artist.
 
 ```src/components/AlbumsCard/index.tsx```
+```javascript
+import React from "react";
+import { AspectRatio, Box, Image, Text } from "native-base";
+import { TouchableOpacity } from "react-native";
+
+export type AlbumCardProps = {
+  thumbnail: string;
+  title: string;
+  subTitle?: string;
+  cardSize?: "sm" | "md" | "lg";
+  id: string;
+  onPress?: () => void;
+};
+const _cardSize = {
+  sm: "100px",
+  md: "150px",
+  lg: "200px",
+};
+export function AlbumCard(props: AlbumCardProps) {
+  const {
+    thumbnail = "https://place-hold.it/150x150",
+    title,
+    subTitle,
+    cardSize = "md",
+    onPress,
+  } = props;
+
+  return (
+    <TouchableOpacity onPress={onPress}>
+      <Box w={_cardSize[cardSize]} m="1">
+        <AspectRatio w="100%" ratio={1} shadow={2} bg="gray.400">
+          <Image source={{ uri: thumbnail }} alt="Thumbnail" />
+        </AspectRatio>
+        <Text fontSize="xs" fontWeight="900">
+          {title}
+        </Text>
+        {subTitle && <Text fontSize="xs">{subTitle}</Text>}
+      </Box>
+    </TouchableOpacity>
+  );
+}
+```
+
+After that, lets create the `CarouselAlbums` component. This component belongs to the home screen so, that can be a domain component.
+
+```src/domains/home/CarouselAlbums/index.tsx```
+```javascript
+import React from "react";
+import { AlbumCard, AlbumCardProps } from "components/AlbumCard";
+import { Box, FlatList, Text } from "native-base";
+
+type Props = {
+  title: string;
+  data: Array<AlbumCardProps>;
+  cardSize?: AlbumCardProps["cardSize"];
+  onPress?: (id: AlbumCardProps["id"]) => void;
+};
+
+export function CarouselAlbums(props: Props) {
+  const { title, data, cardSize, onPress } = props;
+  return (
+    <Box p="2">
+      <Text fontWeight="700" fontSize="xl">
+        {title}
+      </Text>
+      <FlatList
+        data={data}
+        renderItem={({ item }) => (
+          <AlbumCard
+            {...item}
+            key={item.id}
+            cardSize={cardSize}
+            onPress={() => onPress?.(item.id)}
+          />
+        )}
+        keyExtractor={item => item.id}
+        horizontal
+      />
+    </Box>
+  );
+}
+```
+
+Before we move on with the home screen, we need to update the default color for the `<Text />`.
+
+```src/providers/Theme/index.tsx```
+```javascript
+import React from "react";
+import { NativeBaseProvider, extendTheme } from "native-base";
+
+const theme = extendTheme({
+  colors: {
+    primary: {
+      50: "#121212",
+    },
+    secondary: {
+      50: "#65d46e",
+    },
+  },
+  components: {
+    Text: {
+      baseStyle: () => ({
+        color: "white",
+      }),
+    },
+  },
+});
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  return <NativeBaseProvider theme={theme}>{children}</NativeBaseProvider>;
+}
+```
+
+Now we can update the home screen.
+
+```src/screens/Home/index.tsx```
+```javascript
+import React from "react";
+import { ScrollView } from "native-base";
+import { CarouselAlbums } from "domains/home/CarouselAlbums";
+
+// this is temporary, we will use the real data from the api
+const mockData = [
+  {
+    id: "album-1",
+    thumbnail: "https://place-hold.it/150x150",
+    title: "Album 1",
+    subTitle: "Artist 1",
+  },
+  {
+    id: "album-2",
+    thumbnail: "https://place-hold.it/150x150",
+    title: "Album 1",
+    subTitle: "Artist 1",
+  },
+  {
+    id: "album-3",
+    thumbnail: "https://place-hold.it/150x150",
+    title: "Album 1",
+    subTitle: "Artist 1",
+  },
+  {
+    id: "album-4",
+    thumbnail: "https://place-hold.it/150x150",
+    title: "Album 1",
+    subTitle: "Artist 1",
+  },
+  {
+    id: "album-5",
+    thumbnail: "https://place-hold.it/150x150",
+    title: "Album 1",
+    subTitle: "Artist 1",
+  },
+];
+
+export function Home() {
+  return (
+    <ScrollView bg="primary.50">
+      <CarouselAlbums title="Trending albums for you" data={mockData} />
+      <CarouselAlbums title="Your shows" data={mockData} />
+      <CarouselAlbums title="Recently Played" data={mockData} cardSize="sm" />
+    </ScrollView>
+  );
+}
+```
+
+After that, the home should look something like this:
+
+<img src="./assets/home-screen-first-version.png" width="300" alt="Home screen with the Carousel Components" />
