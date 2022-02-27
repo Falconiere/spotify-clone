@@ -171,6 +171,7 @@ import { name as appName } from "./app.json";
 
 AppRegistry.registerComponent(appName, () => App);
 ```
-Rebuild the app and we can see the main screens.
+Rebuild the app and we can see the main screens with the bottom navigation.
 
-![The first main screens](./assets/created-first-ui-for-the-main-screens.png.png "The first main screens")
+<img src="./assets/created-first-ui-for-the-main-screens.png" width="300" alt="Main Screens screen shot" />
+
