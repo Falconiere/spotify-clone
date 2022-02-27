@@ -2,7 +2,7 @@ import React from "react";
 import { Box, HStack, IconButton, Text, Icon } from "native-base";
 import { Ionicons } from "@native-base/icons";
 
-export function HomeHeader() {
+export function Header() {
   return (
     <Box safeAreaTop px="2">
       <HStack justifyContent="space-between">

@@ -452,3 +452,109 @@ After that, the home should look something like this:
 
 Awesome! Lets continue with header for the home screen which is another domain component.
 
+```src/domains/home/Header/index.tsx```
+```javascript
+import React from "react";
+import { Box, HStack, IconButton, Text, Icon } from "native-base";
+import { Ionicons } from "@native-base/icons";
+
+export function Header() {
+  return (
+    <Box safeAreaTop px="2">
+      <HStack justifyContent="space-between">
+        <Text fontSize="2xl" fontWeight="500">
+          Good afternoon
+        </Text>
+        <HStack>
+          <IconButton
+            icon={
+              <Icon
+                as={Ionicons}
+                name="notifications-outline"
+                color="white"
+                size="sm"
+              />
+            }
+          />
+          <IconButton
+            icon={
+              <Icon
+                as={Ionicons}
+                name="ios-timer-outline"
+                color="white"
+                size="sm"
+              />
+            }
+          />
+          <IconButton
+            icon={
+              <Icon
+                as={Ionicons}
+                name="ios-settings-outline"
+                color="white"
+                size="sm"
+              />
+            }
+          />
+        </HStack>
+      </HStack>
+    </Box>
+  );
+}
+```
+After that, lets import it to the home screen:
+
+```src/screens/Home/index.tsx```
+```javascript
+import React from "react";
+import { ScrollView } from "native-base";
+
+import { CarouselAlbums } from "domains/home/CarouselAlbums";
+import { Header } from "domains/home/Header";
+
+const mockData = [
+  {
+    id: "album-1",
+    thumbnail: "https://place-hold.it/150x150",
+    title: "Album 1",
+    subTitle: "Artist 1",
+  },
+  {
+    id: "album-2",
+    thumbnail: "https://place-hold.it/150x150",
+    title: "Album 1",
+    subTitle: "Artist 1",
+  },
+  {
+    id: "album-3",
+    thumbnail: "https://place-hold.it/150x150",
+    title: "Album 1",
+    subTitle: "Artist 1",
+  },
+  {
+    id: "album-4",
+    thumbnail: "https://place-hold.it/150x150",
+    title: "Album 1",
+    subTitle: "Artist 1",
+  },
+  {
+    id: "album-5",
+    thumbnail: "https://place-hold.it/150x150",
+    title: "Album 1",
+    subTitle: "Artist 1",
+  },
+];
+
+export function Home() {
+  return (
+    <ScrollView bg="primary.50">
+      <Header />
+      <CarouselAlbums title="Trending albums for you" data={mockData} />
+      <CarouselAlbums title="Your shows" data={mockData} />
+      <CarouselAlbums title="Recently Played" data={mockData} cardSize="sm" />
+    </ScrollView>
+  );
+}
+```
+
+<img src="./assets/header-home-first-version.png" width="300" alt="Home screen with header" />
