@@ -1,6 +1,6 @@
 import { AlbumCardProps } from "components/AlbumCard";
 import { HorizontalAlbumCard } from "components/HorizontalAlbumCard";
-import { Flex } from "native-base";
+import { HStack } from "native-base";
 
 import React from "react";
 
@@ -10,10 +10,10 @@ type Props = {
 export function LastAlbumsPlayed(props: Props) {
   const { data } = props;
   return (
-    <Flex direction="row" flexWrap="wrap">
+    <HStack flexWrap="wrap">
       {data.map(item => (
         <HorizontalAlbumCard {...item} key={item.id} />
       ))}
-    </Flex>
+    </HStack>
   );
 }
