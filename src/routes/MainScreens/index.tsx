@@ -12,6 +12,7 @@ const { Navigator, Screen } = createMaterialBottomTabNavigator();
 
 export function MainScreens() {
   const theme = useTheme();
+
   return (
     <>
       <StatusBar barStyle="light-content" />

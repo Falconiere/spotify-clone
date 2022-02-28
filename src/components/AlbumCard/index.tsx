@@ -14,6 +14,7 @@ const _cardSize = {
   md: "150px",
   lg: "200px",
 };
+
 export function AlbumCard(props: AlbumCardProps) {
   const {
     thumbnail = "https://place-hold.it/150x150",
