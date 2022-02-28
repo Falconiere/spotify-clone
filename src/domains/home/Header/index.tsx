@@ -4,10 +4,10 @@ import { Ionicons } from "@native-base/icons";
 
 export function Header() {
   return (
-    <Box safeAreaTop px="2">
-      <HStack justifyContent="space-between">
+    <Box>
+      <HStack justifyContent="space-between" style={{ paddingTop: 20 }}>
         <Text fontSize="2xl" fontWeight="500">
-          Good afternoon
+          Good evening
         </Text>
         <HStack>
           <IconButton

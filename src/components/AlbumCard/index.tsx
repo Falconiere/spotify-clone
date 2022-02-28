@@ -30,10 +30,12 @@ export function AlbumCard(props: AlbumCardProps) {
         <AspectRatio w="100%" ratio={1} shadow={2} bg="gray.400">
           <Image source={{ uri: thumbnail }} alt="Thumbnail" />
         </AspectRatio>
-        <Text fontSize="xs" fontWeight="900">
-          {title}
-        </Text>
-        {subTitle && <Text fontSize="xs">{subTitle}</Text>}
+        <Box>
+          <Text fontSize="xs" fontWeight="900">
+            {title}
+          </Text>
+          {subTitle && <Text fontSize="xs">{subTitle}</Text>}
+        </Box>
       </Box>
     </TouchableOpacity>
   );

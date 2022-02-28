@@ -388,6 +388,7 @@ const theme = extendTheme({
     },
   },
 });
+
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   return <NativeBaseProvider theme={theme}>{children}</NativeBaseProvider>;
 }
