@@ -1,6 +1,5 @@
 import React from "react";
 import { StatusBar, useTheme, Icon } from "native-base";
-
 import { Ionicons, Feather, Entypo } from "@native-base/icons";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 

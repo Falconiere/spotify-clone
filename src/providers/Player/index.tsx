@@ -17,6 +17,7 @@ export const usePlayerContext = () =>
 export function PlayerProvider({ children }: { children: React.ReactNode }) {
   const thumbnail = "https://place-hold.it/50x50";
   const [isPlaying, setIsPlaying] = React.useState(false);
+
   return (
     <PlayerContext.Provider
       value={{
