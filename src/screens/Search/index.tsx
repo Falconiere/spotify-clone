@@ -11,7 +11,7 @@ export function Search() {
   return (
     <SafeAreaView style={{ backgroundColor: theme.colors.primary[50] }}>
       <ScrollView bg="primary.50" stickyHeaderIndices={[1]}>
-        <Text fontWeight="700" p="2">
+        <Text fontWeight="700" p="2" fontSize="xl">
           Search
         </Text>
         <SearchInput />

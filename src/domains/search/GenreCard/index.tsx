@@ -6,6 +6,7 @@ type Props = {
   color: string;
   onPress?: () => void;
 };
+
 export function GenreCard(props: Props) {
   const { title, color, onPress } = props;
   return (

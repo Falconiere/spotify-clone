@@ -7,6 +7,8 @@ export function SearchInput() {
     <Box p="2" bg="primary.50">
       <Box bg="white" overflow="hidden" rounded="sm">
         <Input
+          placeholder="Artists, songs, or podcasts"
+          isReadOnly
           leftElement={
             <Icon as={<FontAwesome />} name="search" size="xs" ml="2" />
           }
