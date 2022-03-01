@@ -6,7 +6,7 @@ import { Header } from "domains/home/Header";
 import { LastAlbumsPlayed } from "domains/home/LastAlbumsPlayed";
 
 import { gradientBoxBg } from "./styles";
-import { mockData } from "./mockData";
+import { mockAlbums } from "./mockData";
 
 import { usePlayerContext } from "providers/Player";
 
@@ -16,21 +16,21 @@ export function Home() {
     <ScrollView bg="primary.50">
       <Box safeAreaTop p="2" bg={gradientBoxBg}>
         <Header />
-        <LastAlbumsPlayed data={mockData} />
+        <LastAlbumsPlayed data={mockAlbums} />
       </Box>
       <CarouselAlbums
         title="Trending albums for you"
-        data={mockData}
+        data={mockAlbums}
         onPress={() => playerCtx.togglePlay()}
       />
       <CarouselAlbums
         title="Your shows"
-        data={mockData}
+        data={mockAlbums}
         onPress={() => playerCtx.togglePlay()}
       />
       <CarouselAlbums
         title="Recently Played"
-        data={mockData}
+        data={mockAlbums}
         cardSize="sm"
         onPress={() => playerCtx.togglePlay()}
       />

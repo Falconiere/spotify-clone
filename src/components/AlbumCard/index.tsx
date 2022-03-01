@@ -1,15 +1,17 @@
 import React from "react";
-import { AspectRatio, Box, Image, Text, Pressable } from "native-base";
+import { AspectRatio, Box, Image, Text, Pressable, Stack } from "native-base";
 
 export type AlbumCardProps = {
   thumbnail: string;
   title: string;
   subTitle?: string;
-  cardSize?: "sm" | "md" | "lg";
+  cardSize?: "xs" | "sm" | "md" | "lg";
   id: string;
   onPress?: () => void;
+  horizontal?: boolean;
 };
 const _cardSize = {
+  xs: "50px",
   sm: "100px",
   md: "150px",
   lg: "200px",
@@ -21,26 +23,31 @@ export function AlbumCard(props: AlbumCardProps) {
     title,
     subTitle,
     cardSize = "md",
+    horizontal,
     onPress,
   } = props;
 
   return (
     <Pressable onPress={onPress}>
       {({ isHovered, isFocused, isPressed }) => (
-        <Box
-          w={_cardSize[cardSize]}
+        <Stack
           m="1"
+          direction={horizontal ? "row" : "column"}
+          alignItems={horizontal ? "center" : "flex-start"}
+          space="2"
           opacity={isHovered || isFocused || isPressed ? 0.8 : 1}>
-          <AspectRatio w="100%" ratio={1} shadow={2} bg="gray.400">
-            <Image source={{ uri: thumbnail }} alt="Thumbnail" />
-          </AspectRatio>
-          <Box>
+          <Box w={_cardSize[cardSize]}>
+            <AspectRatio w="100%" ratio={1} shadow={2} bg="gray.400">
+              <Image source={{ uri: thumbnail }} alt="Thumbnail" />
+            </AspectRatio>
+          </Box>
+          <Stack flexWrap="nowrap">
             <Text fontSize="xs" fontWeight="900">
               {title}
             </Text>
             {subTitle && <Text fontSize="xs">{subTitle}</Text>}
-          </Box>
-        </Box>
+          </Stack>
+        </Stack>
       )}
     </Pressable>
   );

@@ -1,4 +1,4 @@
-export const mockData = [
+export const mockAlbums = [
   {
     id: "album-1",
     thumbnail: "https://place-hold.it/150x150",
