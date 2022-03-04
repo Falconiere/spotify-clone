@@ -12,6 +12,11 @@ import { usePlayerContext } from "providers/Player";
 
 export function Home() {
   const playerCtx = usePlayerContext();
+  const handleOnLoadTracks = () => {
+    if (!playerCtx?.isPlayerActive) {
+      playerCtx.togglePlayer();
+    }
+  };
   return (
     <ScrollView bg="primary.50">
       <Box safeAreaTop p="2" bg={gradientBoxBg}>
@@ -21,18 +26,18 @@ export function Home() {
       <CarouselAlbums
         title="Trending albums for you"
         data={mockAlbums}
-        onPress={() => playerCtx.togglePlayer()}
+        onPress={handleOnLoadTracks}
       />
       <CarouselAlbums
         title="Your shows"
         data={mockAlbums}
-        onPress={() => playerCtx.togglePlayer()}
+        onPress={handleOnLoadTracks}
       />
       <CarouselAlbums
         title="Recently Played"
         data={mockAlbums}
         cardSize="sm"
-        onPress={() => playerCtx.togglePlayer()}
+        onPress={handleOnLoadTracks}
       />
     </ScrollView>
   );
