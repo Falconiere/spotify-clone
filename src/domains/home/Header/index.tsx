@@ -12,32 +12,15 @@ export function Header() {
         <HStack>
           <IconButton
             icon={
-              <Icon
-                as={Ionicons}
-                name="notifications-outline"
-                color="white"
-                size="sm"
-              />
+              <Icon as={Ionicons} name="notifications-outline" color="white" size="sm" />
             }
           />
           <IconButton
-            icon={
-              <Icon
-                as={Ionicons}
-                name="ios-timer-outline"
-                color="white"
-                size="sm"
-              />
-            }
+            icon={<Icon as={Ionicons} name="ios-timer-outline" color="white" size="sm" />}
           />
           <IconButton
             icon={
-              <Icon
-                as={Ionicons}
-                name="ios-settings-outline"
-                color="white"
-                size="sm"
-              />
+              <Icon as={Ionicons} name="ios-settings-outline" color="white" size="sm" />
             }
           />
         </HStack>

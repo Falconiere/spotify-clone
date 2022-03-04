@@ -5,11 +5,11 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 
 import { Home } from "screens/Home";
 import { Search } from "screens/Search";
-import { Library } from "screens/Library";
+import { YourLibrary } from "screens/YourLibrary";
 
 const { Navigator, Screen } = createMaterialBottomTabNavigator();
 
-export function MainScreens() {
+export function HomeScreens() {
   const theme = useTheme();
   return (
     <>
@@ -37,17 +37,12 @@ export function MainScreens() {
           }}
         />
         <Screen
-          name="Library"
-          component={Library}
+          name="YourLibrary"
+          component={YourLibrary}
           options={{
             tabBarLabel: "Your Library",
             tabBarIcon: ({ color }) => (
-              <Icon
-                as={Ionicons}
-                name="library-sharp"
-                color={color}
-                size="sm"
-              />
+              <Icon as={Ionicons} name="library-sharp" color={color} size="sm" />
             ),
           }}
         />

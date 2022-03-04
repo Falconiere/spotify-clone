@@ -9,9 +9,7 @@ export function SearchInput() {
         <Input
           placeholder="Artists, songs, or podcasts"
           isReadOnly
-          leftElement={
-            <Icon as={<FontAwesome />} name="search" size="xs" ml="2" />
-          }
+          leftElement={<Icon as={<FontAwesome />} name="search" size="xs" ml="2" />}
         />
       </Box>
     </Box>

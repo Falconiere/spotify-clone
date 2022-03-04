@@ -11,8 +11,7 @@ const PlayerContext = React.createContext<IPlayerContext>({
   togglePlayer: () => undefined,
 });
 
-export const usePlayerContext = () =>
-  React.useContext<IPlayerContext>(PlayerContext);
+export const usePlayerContext = () => React.useContext<IPlayerContext>(PlayerContext);
 
 export function PlayerProvider({ children }: { children: React.ReactNode }) {
   const [isPlayerActive, setPlayerActive] = React.useState(false);

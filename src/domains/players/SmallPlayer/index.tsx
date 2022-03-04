@@ -22,11 +22,7 @@ import TrackPlayer, {
   useProgress,
   useTrackPlayerEvents,
 } from "react-native-track-player";
-import {
-  getProgress,
-  initializePlayer,
-  togglePlayback,
-} from "providers/Player/player";
+import { getProgress, initializePlayer, togglePlayback } from "providers/Player/player";
 
 export function SmallPlayer({ isPlayerActive }: { isPlayerActive: boolean }) {
   const [currentTrack, setCurrentTrack] = React.useState<Track | undefined>();
@@ -39,10 +35,7 @@ export function SmallPlayer({ isPlayerActive }: { isPlayerActive: boolean }) {
   const thumbnail = "https://place-hold.it/50x50";
 
   useTrackPlayerEvents([Event.PlaybackTrackChanged], async event => {
-    if (
-      event.type === Event.PlaybackTrackChanged &&
-      event.nextTrack !== undefined
-    ) {
+    if (event.type === Event.PlaybackTrackChanged && event.nextTrack !== undefined) {
       const track = await TrackPlayer.getTrack(event.nextTrack);
       setCurrentTrack(track);
     }

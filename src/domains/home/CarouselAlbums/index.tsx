@@ -6,7 +6,7 @@ type Props = {
   title: string;
   data: Array<AlbumCardProps>;
   cardSize?: AlbumCardProps["cardSize"];
-  onPress?: (id: AlbumCardProps["id"]) => void;
+  onPress: (id: AlbumCardProps["id"]) => void;
 };
 
 export function CarouselAlbums(props: Props) {
@@ -23,7 +23,7 @@ export function CarouselAlbums(props: Props) {
             {...item}
             key={item.id}
             cardSize={cardSize}
-            onPress={() => onPress?.(item.id)}
+            onPress={() => onPress(item.id)}
           />
         )}
         keyExtractor={item => item.id}
