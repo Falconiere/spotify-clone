@@ -30,11 +30,14 @@ import {
 
 export function SmallPlayer({ isPlayerActive }: { isPlayerActive: boolean }) {
   const [currentTrack, setCurrentTrack] = React.useState<Track | undefined>();
+
   const { data: tracks } = useQueryTopTracks();
+
   const progress = useProgress();
   const playbackState = usePlaybackState();
   const isPlaying = playbackState === State.Playing;
   const thumbnail = "https://place-hold.it/50x50";
+
   useTrackPlayerEvents([Event.PlaybackTrackChanged], async event => {
     if (
       event.type === Event.PlaybackTrackChanged &&
