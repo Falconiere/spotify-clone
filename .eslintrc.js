@@ -17,6 +17,7 @@ module.exports = {
         '@typescript-eslint/quotes': ['error'],
         'object-curly-spacing': 'off',
         '@typescript-eslint/object-curly-spacing': ['error', 'always'],
+        'max-len': 'off',
       },
     },
   ],

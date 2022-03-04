@@ -21,18 +21,18 @@ export function Home() {
       <CarouselAlbums
         title="Trending albums for you"
         data={mockAlbums}
-        onPress={() => playerCtx.togglePlay()}
+        onPress={() => playerCtx.togglePlayer()}
       />
       <CarouselAlbums
         title="Your shows"
         data={mockAlbums}
-        onPress={() => playerCtx.togglePlay()}
+        onPress={() => playerCtx.togglePlayer()}
       />
       <CarouselAlbums
         title="Recently Played"
         data={mockAlbums}
         cardSize="sm"
-        onPress={() => playerCtx.togglePlay()}
+        onPress={() => playerCtx.togglePlayer()}
       />
     </ScrollView>
   );

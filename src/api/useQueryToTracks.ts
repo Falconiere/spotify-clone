@@ -1,10 +1,25 @@
+import { Track } from "react-native-track-player";
 import { useQuery } from "react-query";
+import { tracks } from "./mockData";
 
-export function useQueryToTracks() {
-  const query = useQuery("TOP_TRACKS", () =>
-    fetch(
-      "https://api.napster.com/v2.1/tracks/top?apikey=ZTk2YjY4MjMtMDAzYy00MTg4LWE2MjYtZDIzNjJmMmM0YTdm",
-    ),
-  );
+// https://developer.napster.com/examples
+
+// Look up to the future
+// https://developer.napster.com/examples
+// export type ITrackResponse = {
+//   id: string;
+//   albumId: string;
+//   previewURL: string;
+//   albumName: string;
+//   artistName: string;
+//   name: string;
+// };
+
+// const getAlbumImage = (albumId: string) => {
+//   return `https://direct.rhapsody.com/imageserver/v2/albums/${albumId}/images/300x300.jpg`;
+// };
+
+export function useQueryTopTracks() {
+  const query = useQuery<Track[]>("TOP_TRACKS", (): Track[] => tracks);
   return query;
 }
