@@ -1,7 +1,7 @@
 import React from "react";
 import { AspectRatio, Box, Image, Text, Pressable, Stack } from "native-base";
 
-export type AlbumCardProps = {
+export type PlayListCardProps = {
   thumbnail: string;
   title: string;
   subTitle?: string;
@@ -17,7 +17,7 @@ const _cardSize = {
   lg: "200px",
 };
 
-export function AlbumCard(props: AlbumCardProps) {
+export function PlayListCard(props: PlayListCardProps) {
   const {
     thumbnail = "https://place-hold.it/150x150",
     title,

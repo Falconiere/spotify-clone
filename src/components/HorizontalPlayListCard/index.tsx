@@ -1,10 +1,10 @@
 import React from "react";
 import { AspectRatio, Box, HStack, Image, Text, Pressable } from "native-base";
 
-import { AlbumCardProps } from "components/AlbumCard";
+import { PlayListCardProps } from "components/PlayListCard";
 
-type Props = AlbumCardProps;
-export function HorizontalAlbumCard(props: Props) {
+type Props = PlayListCardProps;
+export function HorizontalPlayListCard(props: Props) {
   const { title, thumbnail, onPress } = props;
   return (
     <Pressable w="1/2" onPress={onPress}>

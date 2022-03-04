@@ -3,9 +3,9 @@ import { Box, ScrollView } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-import { CarouselAlbums } from "domains/home/CarouselAlbums";
+import { CarouselPlayLists } from "domains/home/CarouselPlayLists";
 import { Header } from "domains/home/Header";
-import { LastAlbumsPlayed } from "domains/home/LastAlbumsPlayed";
+import { LastPlayListsPlayed } from "domains/home/LastPlayListsPlayed";
 
 import { gradientBoxBg } from "./styles";
 import { mockAlbums } from "./mockData";
@@ -23,19 +23,19 @@ export function Home() {
     <ScrollView bg="primary.50">
       <Box safeAreaTop p="2" bg={gradientBoxBg}>
         <Header />
-        <LastAlbumsPlayed data={mockAlbums} />
+        <LastPlayListsPlayed data={mockAlbums} />
       </Box>
-      <CarouselAlbums
+      <CarouselPlayLists
         title="Trending albums for you"
         data={mockAlbums}
         onPress={handleOnOpenPlayList}
       />
-      <CarouselAlbums
+      <CarouselPlayLists
         title="Your shows"
         data={mockAlbums}
         onPress={handleOnOpenPlayList}
       />
-      <CarouselAlbums
+      <CarouselPlayLists
         title="Recently Played"
         data={mockAlbums}
         cardSize="sm"

@@ -1,15 +1,15 @@
 import React from "react";
-import { AlbumCard, AlbumCardProps } from "components/AlbumCard";
+import { PlayListCard, PlayListCardProps } from "components/PlayListCard";
 import { Box, FlatList, Text } from "native-base";
 
 type Props = {
   title: string;
-  data: Array<AlbumCardProps>;
-  cardSize?: AlbumCardProps["cardSize"];
-  onPress: (id: AlbumCardProps["id"]) => void;
+  data: Array<PlayListCardProps>;
+  cardSize?: PlayListCardProps["cardSize"];
+  onPress: (id: PlayListCardProps["id"]) => void;
 };
 
-export function CarouselAlbums(props: Props) {
+export function CarouselPlayLists(props: Props) {
   const { title, data, cardSize, onPress } = props;
   return (
     <Box p="2">
@@ -19,7 +19,7 @@ export function CarouselAlbums(props: Props) {
       <FlatList
         data={data}
         renderItem={({ item }) => (
-          <AlbumCard
+          <PlayListCard
             {...item}
             key={item.id}
             cardSize={cardSize}

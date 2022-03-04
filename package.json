@@ -5,9 +5,13 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "ios:m1": "arch -x86_64 react-native run-ios",
+    "pods":"npx pod-install ios",
     "start": "react-native start",
+    "start:reset": "watchman watch-del-all && react-native start --reset-cache",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    
   },
   "dependencies": {
     "@native-base/icons": "^0.0.11",
