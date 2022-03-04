@@ -58,10 +58,8 @@ export function SmallPlayer({ isPlayerActive }: { isPlayerActive: boolean }) {
       return;
     }
     if (isPlayerActive && tracks && tracks.length > 0 && !currentTrack) {
-      (async () => {
-        setCurrentTrack(tracks[0]);
-        await TrackPlayer.play();
-      })();
+      setCurrentTrack(tracks[0]);
+      TrackPlayer.play().catch(console.error);
     }
   }, [currentTrack, tracks, isPlayerActive, playbackState]);
 
@@ -74,7 +72,7 @@ export function SmallPlayer({ isPlayerActive }: { isPlayerActive: boolean }) {
       position="absolute"
       bottom={Platform.OS === "ios" ? 20 : 50}
       marginBottom={Platform.OS === "ios" ? 1 : 0}
-      p="2"
+      p="4"
       w="100%">
       <HStack
         alignItems="center"
