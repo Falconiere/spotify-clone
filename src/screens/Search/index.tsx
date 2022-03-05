@@ -8,9 +8,9 @@ import { SafeAreaView } from "react-native";
 
 export function Search() {
   const theme = useTheme();
+
   return (
-    <SafeAreaView
-      style={{ backgroundColor: theme.colors.primary[50], flex: 1 }}>
+    <SafeAreaView style={{ backgroundColor: theme.colors.primary[50], flex: 1 }}>
       <ScrollView bg="primary.50" stickyHeaderIndices={[1]}>
         <Text fontWeight="700" p="2" fontSize="xl">
           Search
