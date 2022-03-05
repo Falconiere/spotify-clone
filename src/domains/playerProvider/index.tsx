@@ -17,6 +17,7 @@ import PlayerCore, {
   usePlaybackState,
   useTrackPlayerEvents,
 } from "services/playerCore";
+
 import { SmallPlayer } from "./SmallPlayer";
 import { FullPlayer } from "./FullPlayer";
 

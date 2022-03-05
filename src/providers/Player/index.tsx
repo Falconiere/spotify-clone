@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 import playerCore, { Track } from "services/playerCore";
-import { Player } from "domains/player";
+import { Player } from "domains/playerProvider";
 
 interface IPlayerContext {
   setTracks: (currentTracks: Track[], startWithTrackId?: string) => void;
