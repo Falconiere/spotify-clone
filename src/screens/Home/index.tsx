@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, ScrollView } from "native-base";
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
+
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
@@ -11,9 +13,17 @@ import { gradientBoxBg } from "./styles";
 
 import { RootStackParamList, Routes } from "routes/types";
 import { mockPlayLists } from "services/api/mockData";
+import { usePlayerContext } from "providers/Player";
 
 export function Home() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const tabBarHeight = useBottomTabBarHeight();
+
+  const playerCtx = usePlayerContext();
+  useEffect(() => {
+    playerCtx.setTabBarHeight(tabBarHeight);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tabBarHeight]);
 
   const handleOnOpenPlayList = (playListId: string) => {
     navigation.navigate(Routes.PLAYLIST, { playListId });

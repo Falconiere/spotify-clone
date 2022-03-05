@@ -1,3 +1,4 @@
+import { MaterialBottomTabScreenProps } from "@react-navigation/material-bottom-tabs";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 export enum Routes {
@@ -14,3 +15,4 @@ export type PlayListRouteProp = NativeStackScreenProps<
   RootStackParamList,
   Routes.PLAYLIST
 >;
+export type MainScreensNavigationProp = MaterialBottomTabScreenProps<RootStackParamList>;

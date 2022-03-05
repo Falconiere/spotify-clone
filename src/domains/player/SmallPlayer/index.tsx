@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Animated, Easing, Platform } from "react-native";
+import { Animated, Easing } from "react-native";
 
 import {
   AspectRatio,
@@ -19,6 +19,7 @@ import {
 
 import { Ionicons } from "@native-base/icons";
 import { PlayerProps } from "../index";
+import { usePlayerContext } from "providers/Player";
 
 type Props = PlayerProps & {
   onPress: () => void;
@@ -32,6 +33,7 @@ export const SmallPlayer: React.VFC<Props> = ({
   onTogglePlayback,
   onPress,
 }) => {
+  const { tabBarHeight } = usePlayerContext();
   const theme = useTheme();
   const barWidth = useRef(new Animated.Value(progress)).current;
 
@@ -51,19 +53,9 @@ export const SmallPlayer: React.VFC<Props> = ({
   }, [progress, barWidth]);
 
   return (
-    <Stack
-      position="absolute"
-      bottom={Platform.OS === "ios" ? 20 : 50}
-      marginBottom={Platform.OS === "ios" ? 1 : 0}
-      p="4"
-      w="100%">
+    <Stack position="absolute" bottom={0} marginBottom={tabBarHeight} w="100%">
       <Pressable onPress={onPress}>
-        <HStack
-          alignItems="center"
-          bg="primary.100"
-          shadow={2}
-          rounded="md"
-          overflow="hidden">
+        <HStack alignItems="center" bg="primary.100" shadow={2} overflow="hidden">
           <Column w="50px">
             <AspectRatio w="100%" ratio={1} bg="gray.400">
               {currentTrack?.artwork && (

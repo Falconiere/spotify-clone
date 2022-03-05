@@ -5,10 +5,14 @@ import { Player } from "domains/player";
 
 interface IPlayerContext {
   setTracks: (currentTracks: Track[], startWithTrackId?: string) => void;
+  setTabBarHeight: (tabHeight: number) => void;
+  tabBarHeight: number;
 }
 
 const PlayerContext = React.createContext<IPlayerContext>({
   setTracks: () => undefined,
+  setTabBarHeight: () => undefined,
+  tabBarHeight: 40,
 });
 
 export const usePlayerContext = () => React.useContext<IPlayerContext>(PlayerContext);
@@ -17,6 +21,7 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
   const [isPlayerActive, setPlayerActive] = React.useState(false);
   const [tracks, setTracks] = React.useState<Track[]>([]);
   const [startWithTrack, setStartWithTrack] = React.useState<Track>();
+  const [tabBarHeight, setTabBarHeight] = React.useState(40);
 
   const handleOnSetTracks = (currentTracks: Track[], startWithTrackId?: string) => {
     if (!currentTracks || !startWithTrackId) {
@@ -47,6 +52,8 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     <PlayerContext.Provider
       value={{
         setTracks: handleOnSetTracks,
+        setTabBarHeight,
+        tabBarHeight,
       }}>
       {children}
       <Player
