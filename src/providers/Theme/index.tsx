@@ -24,6 +24,11 @@ const theme = extendTheme({
         color: "white",
       }),
     },
+    Heading: {
+      baseStyle: () => ({
+        color: "white",
+      }),
+    },
   },
 });
 export function ThemeProvider({ children }: { children: React.ReactNode }) {

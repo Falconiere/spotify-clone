@@ -55,6 +55,10 @@ export async function skipTo(track: Track): Promise<Track> {
   return track;
 }
 
+export async function skipToByIndex(index: number): Promise<void> {
+  await TrackPlayer.skip(index);
+}
+
 export async function getCurrentTrack(): Promise<Track> {
   const trackIdx = await TrackPlayer.getCurrentTrack();
   const track = await TrackPlayer.getTrack(trackIdx);

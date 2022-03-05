@@ -1,6 +1,7 @@
-import React from "react";
-import { SmallPlayer } from "domains/players/SmallPlayer";
-import { Track } from "services/playerCore";
+import React, { useEffect } from "react";
+
+import playerCore, { Track } from "services/playerCore";
+import { Player } from "domains/player";
 
 interface IPlayerContext {
   setTracks: (currentTracks: Track[], startWithTrackId?: string) => void;
@@ -28,13 +29,27 @@ export function PlayerProvider({ children }: { children: React.ReactNode }) {
     setPlayerActive(true);
   };
 
+  useEffect(() => {
+    const resumeFromBackground = async () => {
+      try {
+        const _tracks = (await playerCore.getQueue()) as Track[];
+        const _startWithTrackId = await playerCore.getCurrentTrack();
+        handleOnSetTracks(_tracks, _tracks[_startWithTrackId]?.id);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    resumeFromBackground();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <PlayerContext.Provider
       value={{
         setTracks: handleOnSetTracks,
       }}>
       {children}
-      <SmallPlayer
+      <Player
         isPlayerActive={isPlayerActive}
         startWithTrack={startWithTrack}
         tracks={tracks}
