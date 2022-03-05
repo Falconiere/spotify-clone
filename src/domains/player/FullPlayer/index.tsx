@@ -83,6 +83,7 @@ export const FullPlayer: React.VFC<Props> = ({
               )}
               sliderWidth={SLIDER_WIDTH}
               itemWidth={ITEM_SLIDER_WIDTH}
+              itemHeight={ITEM_SLIDER_WIDTH}
             />
           )}
         </Stack>

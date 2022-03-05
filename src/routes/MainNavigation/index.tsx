@@ -4,10 +4,11 @@ import { Ionicons, Feather, Entypo } from "@native-base/icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+import { Routes } from "routes/types";
+
 import { Home } from "screens/Home";
 import { Search } from "screens/Search";
 import { YourLibrary } from "screens/YourLibrary";
-import { Routes } from "routes/types";
 import { PlayList } from "screens/PlayList";
 
 const BottomStack = createBottomTabNavigator();
@@ -49,19 +50,19 @@ const NestedLibrary = () => (
   </Stack.Navigator>
 );
 
-export function HomeScreens() {
+export function MainNavigation() {
   const theme = useTheme();
   return (
-    <>
-      <BottomStack.Navigator
-        screenOptions={{
-          tabBarStyle: {
-            backgroundColor: theme.colors.primary["50"],
-            borderTopColor: theme.colors.primary["50"],
-          },
-          tabBarActiveTintColor: theme.colors.white,
-          headerShown: false,
-        }}>
+    <BottomStack.Navigator
+      screenOptions={{
+        tabBarStyle: {
+          backgroundColor: theme.colors.primary["50"],
+          borderTopColor: theme.colors.primary["50"],
+        },
+        tabBarActiveTintColor: theme.colors.white,
+        headerShown: false,
+      }}>
+      <BottomStack.Group>
         <BottomStack.Screen
           name="NestedHome"
           component={NestedHome}
@@ -92,7 +93,7 @@ export function HomeScreens() {
             ),
           }}
         />
-      </BottomStack.Navigator>
-    </>
+      </BottomStack.Group>
+    </BottomStack.Navigator>
   );
 }
