@@ -8,7 +8,8 @@ export async function initializePlayer(tracks: Track[]) {
       return;
     }
 
-    await TrackPlayer.destroy();
+    await TrackPlayer.stop();
+    await TrackPlayer.reset();
     await TrackPlayer.setupPlayer({});
     await TrackPlayer.updateOptions({
       stopWithApp: false,
@@ -30,16 +31,19 @@ export async function initializePlayer(tracks: Track[]) {
   }
 }
 
-export async function togglePlayback(playbackState: State) {
+export async function togglePlayback(playbackState: State): Promise<State> {
   const currentTrack = await TrackPlayer.getCurrentTrack();
 
   if (currentTrack == null) {
     // TODO: Perhaps present an error or restart the playlist?
+    return State.Paused;
   } else {
     if (playbackState !== State.Playing) {
       await TrackPlayer.play();
+      return State.Playing;
     } else {
       await TrackPlayer.pause();
+      return State.Paused;
     }
   }
 }
@@ -62,7 +66,6 @@ export async function startPlaying(startWithTrack?: Track): Promise<Track> {
   const track = startWithTrack?.id
     ? await skipTo(startWithTrack)
     : await getCurrentTrack();
-  await TrackPlayer.play();
   return track;
 }
 

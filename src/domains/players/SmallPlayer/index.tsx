@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Platform } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { Animated, Easing, Platform } from "react-native";
 
 import {
   AspectRatio,
@@ -12,6 +12,7 @@ import {
   Spinner,
   Stack,
   Text,
+  useTheme,
 } from "native-base";
 
 import { Ionicons } from "@native-base/icons";
@@ -39,15 +40,40 @@ type Props = {
 };
 
 export function SmallPlayer({ isPlayerActive, startWithTrack, tracks }: Props) {
+  const theme = useTheme();
+
   const [currentTrack, setCurrentTrack] = useState<Track>();
+  const localStatePlaybackState = useRef<State>(State.Playing);
+  const barWidth = useRef(new Animated.Value(0)).current;
+
+  const progressPercent = barWidth.interpolate({
+    inputRange: [0, 100],
+    outputRange: ["0%", "100%"],
+    easing: Easing.linear,
+  });
 
   const progress = useProgress();
+
   const playbackState = usePlaybackState();
   const isPlaying = playbackState === State.Playing;
   const isBuffering = playbackState === State.Buffering;
+  const calculateProgress = getProgress(progress);
+
+  useEffect(() => {
+    if (!isPlayerActive) {
+      return;
+    }
+    Animated.timing(barWidth, {
+      toValue: calculateProgress,
+      duration: calculateProgress >= 99 ? 100 : 3000,
+      useNativeDriver: false,
+      easing: Easing.linear,
+    }).start();
+  }, [barWidth, isPlayerActive, calculateProgress]);
 
   useTrackPlayerEvents([Event.PlaybackTrackChanged], async event => {
     if (event.type === Event.PlaybackTrackChanged && event.nextTrack !== undefined) {
+      barWidth.setValue(0);
       const track = await TrackPlayer.getTrack(event.nextTrack);
       setCurrentTrack(track as Track);
     }
@@ -62,12 +88,20 @@ export function SmallPlayer({ isPlayerActive, startWithTrack, tracks }: Props) {
         await initializePlayer(tracks);
         const _currentTrack = await startPlaying(startWithTrack);
         setCurrentTrack(_currentTrack);
+        if (localStatePlaybackState.current === State.Playing) {
+          TrackPlayer.play();
+        }
       } catch (error) {
         console.error(error);
       }
     };
     startPlayer();
   }, [isPlayerActive, startWithTrack, tracks]);
+
+  const handleOnTogglePlayback = async () => {
+    const state = await togglePlayback(playbackState);
+    localStatePlaybackState.current = state;
+  };
 
   if (!isPlayerActive) {
     return null;
@@ -99,7 +133,18 @@ export function SmallPlayer({ isPlayerActive, startWithTrack, tracks }: Props) {
           </AspectRatio>
         </Box>
         <Box flex="1" h="100%">
-          <Box bg="gray.900" h="100%" w={`${getProgress(progress)}%`} />
+          <Animated.View
+            style={[
+              {
+                flex: 1,
+                height: "100%",
+                backgroundColor: theme.colors.gray[500],
+              },
+              {
+                width: progressPercent,
+              },
+            ]}
+          />
           <Box position="absolute" pl="2" pt="1">
             <Text fontWeight="600" fontSize="sm">
               {currentTrack?.title}
@@ -108,7 +153,7 @@ export function SmallPlayer({ isPlayerActive, startWithTrack, tracks }: Props) {
           </Box>
         </Box>
         <IconButton
-          onPress={() => togglePlayback(playbackState)}
+          onPress={handleOnTogglePlayback}
           position="absolute"
           zIndex={1}
           right="0"
