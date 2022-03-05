@@ -8,9 +8,9 @@ import { Header } from "domains/home/Header";
 import { LastPlayListsPlayed } from "domains/home/LastPlayListsPlayed";
 
 import { gradientBoxBg } from "./styles";
-import { mockAlbums } from "./mockData";
 
 import { RootStackParamList, Routes } from "routes/types";
+import { mockPlayLists } from "services/api/mockData";
 
 export function Home() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -23,21 +23,21 @@ export function Home() {
     <ScrollView bg="primary.50">
       <Box safeAreaTop p="2" bg={gradientBoxBg}>
         <Header />
-        <LastPlayListsPlayed data={mockAlbums} />
+        <LastPlayListsPlayed data={mockPlayLists} />
       </Box>
       <CarouselPlayLists
         title="Trending albums for you"
-        data={mockAlbums}
+        data={mockPlayLists}
         onPress={handleOnOpenPlayList}
       />
       <CarouselPlayLists
         title="Your shows"
-        data={mockAlbums}
+        data={mockPlayLists}
         onPress={handleOnOpenPlayList}
       />
       <CarouselPlayLists
         title="Recently Played"
-        data={mockAlbums}
+        data={mockPlayLists}
         cardSize="sm"
         onPress={handleOnOpenPlayList}
       />

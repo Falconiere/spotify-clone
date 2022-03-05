@@ -1,11 +1,13 @@
 import React from "react";
+import { SafeAreaView } from "react-native";
 
 import { ScrollView, useTheme } from "native-base";
 import { Header } from "domains/yourLibrary/Header";
-import { SafeAreaView } from "react-native";
-import { mockAlbums } from "screens/Home/mockData";
+
 import { PlayListCard } from "components/PlayListCard";
 import { replaceAllWhiteSpaces } from "utils/string";
+
+import { mockPlayLists } from "services/api/mockData";
 
 export function YourLibrary() {
   const theme = useTheme();
@@ -13,7 +15,7 @@ export function YourLibrary() {
     <SafeAreaView style={{ backgroundColor: theme.colors.primary[50], flex: 1 }}>
       <Header />
       <ScrollView w="100%" px="2" pt="5">
-        {mockAlbums.map((item, idx) => (
+        {mockPlayLists.map((item, idx) => (
           <PlayListCard
             key={`${idx}-${replaceAllWhiteSpaces(item.id)}`}
             cardSize="xs"

@@ -1,6 +1,7 @@
 import React from "react";
-import { PlayListCard, PlayListCardProps } from "components/PlayListCard";
 import { Box, FlatList, Text } from "native-base";
+
+import { PlayListCard, PlayListCardProps } from "components/PlayListCard";
 
 type Props = {
   title: string;
@@ -9,7 +10,7 @@ type Props = {
   onPress: (id: PlayListCardProps["id"]) => void;
 };
 
-export function CarouselPlayLists(props: Props) {
+export const CarouselPlayLists: React.VFC<Props> = props => {
   const { title, data, cardSize, onPress } = props;
   return (
     <Box p="2">
@@ -31,4 +32,4 @@ export function CarouselPlayLists(props: Props) {
       />
     </Box>
   );
-}
+};

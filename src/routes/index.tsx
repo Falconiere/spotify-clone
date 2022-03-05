@@ -12,8 +12,8 @@ import { PlayList } from "screens/PlayList";
 import { RootStackParamList, Routes } from "./types";
 
 const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>();
-const options = { headerShown: false };
 
+const options = { headerShown: false };
 export function Router() {
   return (
     <NavigationContainer>
