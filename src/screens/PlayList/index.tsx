@@ -11,8 +11,8 @@ import { usePlayerContext } from "providers/Player";
 
 export const PlayList: React.VFC = () => {
   const { playListId } = useRoute<PlayListRouteProp["route"]>().params;
-  const playList = mockPlayLists.find(({ id }) => id === playListId);
 
+  const playList = mockPlayLists.find(({ id }) => id === playListId);
   const playerCtx = usePlayerContext();
 
   const handlePressTrack = (trackId: string) => {
