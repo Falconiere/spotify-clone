@@ -29,8 +29,7 @@
     "react-native-svg": "^12.1.1",
     "react-native-track-player": "^2.1.2",
     "react-native-typescript-transformer": "^1.2.13",
-    "react-native-vector-icons": "^9.1.0",
-    "react-query": "^3.34.16"
+    "react-native-vector-icons": "^9.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
