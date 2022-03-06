@@ -18,16 +18,18 @@ import {
 } from "native-base";
 
 import { Ionicons } from "@native-base/icons";
+
 import { PlayerProps } from "../index";
 import { usePlayerContext } from "providers/Player";
 
-type Props = PlayerProps & {
+interface Props extends Partial<PlayerProps> {
   onPress: () => void;
-};
+  calculateProgress: number;
+}
 
 export const SmallPlayer: React.VFC<Props> = ({
   currentTrack,
-  progress,
+  calculateProgress,
   isBuffering,
   isPlaying,
   onTogglePlayback,
@@ -35,7 +37,7 @@ export const SmallPlayer: React.VFC<Props> = ({
 }) => {
   const { tabBarHeight } = usePlayerContext();
   const theme = useTheme();
-  const barWidth = useRef(new Animated.Value(progress)).current;
+  const barWidth = useRef(new Animated.Value(calculateProgress)).current;
 
   const progressPercent = barWidth.interpolate({
     inputRange: [0, 100],
@@ -44,13 +46,17 @@ export const SmallPlayer: React.VFC<Props> = ({
   });
 
   useEffect(() => {
+    if (calculateProgress >= 100 || calculateProgress < 1) {
+      barWidth.setValue(calculateProgress);
+      return;
+    }
     Animated.timing(barWidth, {
-      toValue: progress,
-      duration: progress >= 99 ? 100 : 3000,
+      toValue: calculateProgress,
+      duration: 3000,
       useNativeDriver: false,
       easing: Easing.linear,
     }).start();
-  }, [progress, barWidth]);
+  }, [calculateProgress, barWidth]);
 
   return (
     <Stack position="absolute" bottom={0} marginBottom={tabBarHeight} w="100%">

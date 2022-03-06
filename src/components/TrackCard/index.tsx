@@ -1,7 +1,7 @@
 import React from "react";
 
 import { AspectRatio, Column, HStack, Image, Pressable, Text } from "native-base";
-import { Track } from "services/playerCore";
+import { Track } from "services/player";
 
 type Props = {
   onPress: () => void;

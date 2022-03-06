@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import {
   getProgress,
   initializePlayer,
+  seekTo,
   skipToByIndex,
   startPlaying,
   togglePlayback,
@@ -16,10 +17,12 @@ import PlayerCore, {
   useProgress,
   usePlaybackState,
   useTrackPlayerEvents,
-} from "services/playerCore";
+  ProgressState,
+} from "services/player";
 
-import { SmallPlayer } from "./SmallPlayer";
-import { FullPlayer } from "./FullPlayer";
+import { SmallPlayer } from "./Small";
+import { FullPlayer } from "./Full";
+import { usePlayerContext } from "providers/Player";
 
 type Props = {
   isPlayerActive: boolean;
@@ -29,13 +32,14 @@ type Props = {
 
 export type PlayerProps = {
   currentTrack?: Track;
-  progress: number;
+  progress: ProgressState;
   isBuffering: boolean;
   isPlaying: boolean;
   onTogglePlayback: () => void;
 };
 
 export function Player({ isPlayerActive, startWithTrack, tracks }: Props) {
+  const playerCtx = usePlayerContext();
   const [isFullPlayerOpen, setIsFullPlayerOpen] = useState(false);
 
   const [currentTrack, setCurrentTrack] = useState<Track>();
@@ -73,6 +77,13 @@ export function Player({ isPlayerActive, startWithTrack, tracks }: Props) {
     startPlayer();
   }, [isPlayerActive, startWithTrack, tracks]);
 
+  useEffect(() => {
+    if (isPlaying && !isPlayerActive) {
+      playerCtx.setIsActivePlayer(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const currentTrackIdx = useMemo(() => {
     return tracks.findIndex(({ id }) => id === currentTrack?.id);
   }, [currentTrack?.id, tracks]);
@@ -98,7 +109,7 @@ export function Player({ isPlayerActive, startWithTrack, tracks }: Props) {
         currentTrack={currentTrack}
         isPlaying={isPlaying}
         isBuffering={isBuffering}
-        progress={calculateProgress}
+        calculateProgress={calculateProgress}
         onTogglePlayback={handleOnTogglePlayback}
         onPress={handleOnTogglePlayer}
       />
@@ -108,11 +119,12 @@ export function Player({ isPlayerActive, startWithTrack, tracks }: Props) {
         currentTrack={currentTrack}
         isPlaying={isPlaying}
         isBuffering={isBuffering}
-        progress={calculateProgress}
+        progress={progress}
         onTogglePlayback={handleOnTogglePlayback}
         onClose={handleOnTogglePlayer}
         currentTrackIdx={currentTrackIdx}
         onSkip={handleOnSkipByIndex}
+        onSeekTo={seekTo}
       />
     </>
   );

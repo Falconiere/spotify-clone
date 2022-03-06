@@ -1,5 +1,6 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
+import { SSRProvider } from "@react-aria/ssr";
 
 import { ThemeProvider } from "providers/Theme";
 import { PlayerProvider } from "providers/Player";
@@ -11,7 +12,7 @@ import { StatusBar } from "native-base";
 
 export function Router() {
   return (
-    <>
+    <SSRProvider>
       <StatusBar barStyle="light-content" />
       <NavigationContainer>
         <ThemeProvider>
@@ -22,6 +23,6 @@ export function Router() {
           </ApiProvider>
         </ThemeProvider>
       </NavigationContainer>
-    </>
+    </SSRProvider>
   );
 }

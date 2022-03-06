@@ -1,4 +1,4 @@
-import { Track } from "services/playerCore";
+import { Track } from "services/player";
 
 export interface IPlayList {
   id: string;

@@ -1,4 +1,4 @@
-import TrackPlayer, { Capability, RepeatMode, State, Track } from "services/playerCore";
+import TrackPlayer, { Capability, RepeatMode, State, Track } from "services/player";
 
 export async function initializePlayer(tracks: Track[]) {
   try {
@@ -73,6 +73,9 @@ export async function startPlaying(startWithTrack?: Track): Promise<Track> {
   return track;
 }
 
+export async function seekTo(position: number) {
+  await TrackPlayer.seekTo(position);
+}
 export function getProgress({
   position,
   duration,
@@ -83,7 +86,7 @@ export function getProgress({
   if (!duration) {
     return 0;
   }
-  return Math.floor((position / duration) * 100);
+  return (position / duration) * 100;
 }
 export function secondsToHHMMSS(seconds: number | string) {
   // credits - https://stackoverflow.com/a/37096512

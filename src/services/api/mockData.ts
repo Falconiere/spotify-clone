@@ -7,7 +7,7 @@ export const tracks = [
     title: "Longing",
     artist: "David Chavez",
     artwork: "https://i.scdn.co/image/e5c7b168be89098eb686e02152aaee9d3a24e5b6",
-    duration: 143,
+    duration: 115,
   },
   {
     id: "track-2",
@@ -15,7 +15,7 @@ export const tracks = [
     title: "Soul Searching (Demo)",
     artist: "David Chavez",
     artwork: "https://i.scdn.co/image/e5c7b168be89098eb686e02152aaee9d3a24e5b6",
-    duration: 77,
+    duration: 115,
   },
   {
     id: "track-3",
@@ -23,7 +23,7 @@ export const tracks = [
     title: "Lullaby (Demo)",
     artist: "David Chavez",
     artwork: "https://i.scdn.co/image/e5c7b168be89098eb686e02152aaee9d3a24e5b6",
-    duration: 71,
+    duration: 116,
   },
   {
     id: "track-4",
@@ -31,7 +31,7 @@ export const tracks = [
     title: "Rhythm City (Demo)",
     artist: "David Chavez",
     artwork: "https://i.scdn.co/image/e5c7b168be89098eb686e02152aaee9d3a24e5b6",
-    duration: 106,
+    duration: 117,
   },
 ];
 

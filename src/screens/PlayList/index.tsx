@@ -8,6 +8,7 @@ import { Header } from "domains/playList/Header";
 import { mockPlayLists } from "services/api/mockData";
 import { TrackCard } from "components/TrackCard";
 import { usePlayerContext } from "providers/Player";
+import { Track } from "services/player";
 
 export const PlayList: React.VFC = () => {
   const { playListId } = useRoute<PlayListRouteProp["route"]>().params;
@@ -15,11 +16,11 @@ export const PlayList: React.VFC = () => {
   const playList = mockPlayLists.find(({ id }) => id === playListId);
   const playerCtx = usePlayerContext();
 
-  const handlePressTrack = (trackId: string) => {
+  const handlePressTrack = (track: Track) => {
     if (!playList?.tracks) {
       return;
     }
-    playerCtx.setTracks(playList?.tracks, trackId);
+    playerCtx.setTracks(playList?.tracks, track);
   };
 
   return (
@@ -28,7 +29,7 @@ export const PlayList: React.VFC = () => {
       <FlatList
         data={playList?.tracks}
         renderItem={({ item }) => (
-          <TrackCard key={item.id} {...item} onPress={() => handlePressTrack(item.id)} />
+          <TrackCard key={item.id} {...item} onPress={() => handlePressTrack(item)} />
         )}
       />
     </View>

@@ -9,6 +9,7 @@ import {
   IconButton,
   Image,
   Modal,
+  Slider,
   Stack,
   Text,
   View,
@@ -16,7 +17,7 @@ import {
 import { Ionicons, Entypo } from "@native-base/icons";
 
 import { PlayerProps } from "../index";
-import { Track } from "services/playerCore";
+import { Track } from "services/player";
 import { Dimensions } from "react-native";
 
 type Props = PlayerProps & {
@@ -25,6 +26,7 @@ type Props = PlayerProps & {
   currentTrackIdx: number;
   tracks: Track[];
   onSkip: (index: number) => void;
+  onSeekTo: (position: number) => void;
 };
 
 const { width } = Dimensions.get("window");
@@ -39,8 +41,13 @@ export const FullPlayer: React.VFC<Props> = ({
   currentTrack,
   currentTrackIdx,
   tracks,
+  progress,
+  onSeekTo,
 }) => {
+  const sliderRef = useRef<typeof Slider>(null);
   const carouselRef = useRef<Carousel<Track>>(null);
+
+  const { position, duration } = progress;
 
   useEffect(() => {
     carouselRef.current?.snapToItem(currentTrackIdx);
@@ -90,6 +97,22 @@ export const FullPlayer: React.VFC<Props> = ({
         <Box p="2">
           <Heading>{currentTrack?.title}</Heading>
           <Text>{currentTrack?.artist}</Text>
+        </Box>
+        <Box p="3">
+          <Slider
+            ref={sliderRef}
+            w="100%"
+            defaultValue={0}
+            minValue={0}
+            maxValue={duration}
+            value={position}
+            onChangeEnd={onSeekTo}
+            accessibilityLabel="Track slider progress">
+            <Slider.Track>
+              <Slider.FilledTrack bg="white" />
+            </Slider.Track>
+            <Slider.Thumb bg="white" />
+          </Slider>
         </Box>
       </View>
     </Modal>
